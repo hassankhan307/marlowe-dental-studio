@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marlowe Dental Studio — A calmer way to care for your smile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --ivory: #FBF7EF;
+    --ivory-deep: #F2EBDC;
+    --pine: #1F3B33;
+    --pine-light: #2E5347;
+    --sage: #8CA48D;
+    --sage-pale: #DCE6DA;
+    --coral: #E2755A;
+    --coral-deep: #C9603F;
+    --ink: #23211D;
+    --ink-soft: #5B5850;
+    --line: rgba(35,33,29,0.12);
+    --radius-sm: 4px;
+    --radius-md: 10px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--ivory);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    margin: 0;
+    color: var(--pine);
+  }
+  p{ margin: 0; }
+  a{ color: inherit; text-decoration: none; }
+  img, svg{ display:block; max-width:100%; }
+  ul{ margin:0; padding:0; list-style:none; }
+  button{ font-family: inherit; cursor:pointer; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+
+  :focus-visible{
+    outline: 2px solid var(--coral-deep);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  .site-nav{
+    position: sticky;
+    top:0;
+    z-index: 50;
+    background: rgba(251,247,239,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    height: 76px;
+  }
+  .brand{
+    font-family:'Newsreader', serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--pine);
+    letter-spacing: 0.01em;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .brand-mark{ flex-shrink:0; }
+  .nav-links{
+    display:flex;
+    gap: 36px;
+    align-items:center;
+  }
+  .nav-links a{
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    position:relative;
+    padding: 4px 0;
+  }
+  .nav-links a:not(.nav-cta)::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:100%; height:1px;
+    background: var(--pine);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  .nav-links a:not(.nav-cta):hover::after{ transform: scaleX(1); transform-origin: left; }
+  .nav-links a:hover{ color: var(--pine); }
+  .nav-cta{
+    background: var(--pine);
+    color: var(--ivory) !important;
+    padding: 11px 22px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s ease;
+  }
+  .nav-cta:hover{ background: var(--pine-light); }
+  .nav-toggle{ display:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 96px 0 110px;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items:center;
+  }
+  .hero-eyebrow{
+    color: var(--coral-deep);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 22px;
+    opacity:0;
+    animation: rise 0.7s ease 0.05s forwards;
+  }
+  .hero h1{
+    font-size: clamp(2.6rem, 4.6vw, 3.8rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    max-width: 12ch;
+    opacity:0;
+    animation: rise 0.7s ease 0.15s forwards;
+  }
+  .hero-sub{
+    margin-top: 26px;
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    opacity:0;
+    animation: rise 0.7s ease 0.3s forwards;
+  }
+  .hero-actions{
+    margin-top: 38px;
+    display:flex;
+    gap: 18px;
+    align-items:center;
+    flex-wrap:wrap;
+    opacity:0;
+    animation: rise 0.7s ease 0.45s forwards;
+  }
+  .btn-primary{
+    background: var(--coral);
+    color: var(--ivory);
+    padding: 15px 30px;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    font-size: 1rem;
+    border:none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .btn-primary:hover{ background: var(--coral-deep); transform: translateY(-1px); }
+  .btn-ghost{
+    color: var(--pine);
+    font-weight: 500;
+    border-bottom: 1px solid var(--pine);
+    padding-bottom: 2px;
+  }
+  .hero-trust{
+    margin-top: 52px;
+    display:flex;
+    gap: 14px;
+    align-items:center;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    opacity:0;
+    animation: rise 0.7s ease 0.6s forwards;
+  }
+  .hero-trust strong{ color: var(--pine); }
+
+  @keyframes rise{
+    from{ opacity:0; transform: translateY(14px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  .hero-art{
+    position:relative;
+    animation: float 6s ease-in-out 1.2s infinite;
+  }
+  @keyframes float{
+    0%, 100%{ transform: translateY(0); }
+    50%{ transform: translateY(-10px); }
+  }
+  .hero-art .tooth-outline{
+    stroke-dasharray: 900;
+    stroke-dashoffset: 900;
+    animation: draw 1.8s ease-out 0.5s forwards;
+  }
+  .hero-art .tooth-nerve{
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: draw 0.9s ease-out 1.9s forwards;
+  }
+  .hero-art .tooth-dot{
+    opacity:0;
+    transform-origin: 180px 200px;
+    animation: pop 0.5s cubic-bezier(.34,1.56,.64,1) 2.3s forwards;
+  }
+  @keyframes draw{ to{ stroke-dashoffset: 0; } }
+  @keyframes pop{
+    from{ opacity:0; transform: scale(0); }
+    to{ opacity:1; transform: scale(1); }
+  }
+
+  /* ---------- SCROLL REVEALS ---------- */
+  [data-reveal]{
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  [data-reveal="up"]{ transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  [data-reveal="up"].in-view{ opacity:1; transform: translateY(0); }
+
+  [data-reveal="wipe"]{ clip-path: inset(0 0 100% 0); transform:none; transition: clip-path 0.8s cubic-bezier(.65,0,.35,1), opacity 0.1s; }
+  [data-reveal="wipe"].in-view{ opacity:1; clip-path: inset(0 0 0% 0); }
+
+  [data-reveal="scale"]{ transform: scale(0.94); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.22,1,.36,1); }
+  [data-reveal="scale"].in-view{ opacity:1; transform: scale(1); }
+
+  [data-reveal-group] [data-reveal]{ transition-delay: calc(var(--i, 0) * 110ms); }
+
+  @media (prefers-reduced-motion: reduce){
+    [data-reveal]{ opacity:1 !important; transform:none !important; clip-path:none !important; }
+    .hero-art{ animation:none; }
+    .hero-art .tooth-outline, .hero-art .tooth-nerve, .hero-art .tooth-dot{ animation:none; stroke-dashoffset:0; opacity:1; transform:scale(1); }
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{ padding: 100px 0; }
+  .section-alt{ background: var(--pine); color: var(--ivory); }
+  .section-alt h2, .section-alt h3{ color: var(--ivory); }
+  .section-alt .section-lede{ color: rgba(251,247,239,0.72); }
+
+  .section-head{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items:end;
+    margin-bottom: 64px;
+  }
+  .section-head h2{
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    line-height:1.15;
+    max-width: 14ch;
+  }
+  .section-lede{
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 42ch;
+  }
+
+  /* ---------- SERVICES (asymmetric) ---------- */
+  .services-grid{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+  }
+  .service-card{
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 32px;
+    background: var(--ivory-deep);
+    transition: transform 0.35s cubic-bezier(.22,1,.36,1), border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+  .service-card:hover{
+    transform: translateY(-6px);
+    border-color: var(--pine);
+    box-shadow: 0 16px 30px -18px rgba(31,59,51,0.35);
+  }
+  .service-card.large{ grid-column: span 4; }
+  .service-card.small{ grid-column: span 2; }
+  .service-card.wide-half{ grid-column: span 3; }
+  .service-icon{ width:40px; height:40px; margin-bottom: 22px; transition: transform 0.35s ease; }
+  .service-card:hover .service-icon{ transform: scale(1.1) rotate(-4deg); }
+  .service-card h3{ font-size: 1.35rem; margin-bottom: 12px; }
+  .service-card p{ color: var(--ink-soft); font-size: 0.98rem; }
+  .service-card.large p{ max-width: 42ch; }
+
+  /* ---------- APPROACH / STEPS ---------- */
+  .steps{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    counter-reset: step;
+  }
+  .step{
+    padding: 0 28px 0 0;
+    border-left: 1px solid rgba(251,247,239,0.25);
+    padding-left: 28px;
+  }
+  .step:first-child{ border-left: none; padding-left:0; }
+  .step-num{
+    font-family:'Newsreader', serif;
+    font-size: 1.1rem;
+    color: var(--coral);
+    margin-bottom: 18px;
+    display:block;
+  }
+  .step h3{ font-size: 1.3rem; margin-bottom: 12px; }
+  .step p{ color: rgba(251,247,239,0.72); font-size: 0.98rem; }
+
+  /* ---------- TEAM ---------- */
+  .team-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .team-card{}
+  .team-photo{
+    aspect-ratio: 4/5;
+    border-radius: var(--radius-md);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom: 20px;
+    font-family:'Newsreader', serif;
+    font-size: 2.6rem;
+    color: var(--ivory);
+    transition: transform 0.4s cubic-bezier(.22,1,.36,1);
+  }
+  .team-card:hover .team-photo{ transform: translateY(-5px); }
+  .team-photo.p1{ background: var(--pine); }
+  .team-photo.p2{ background: var(--sage); }
+  .team-photo.p3{ background: var(--coral); }
+  .team-card h3{ font-size: 1.2rem; margin-bottom: 4px; }
+  .team-role{ color: var(--coral-deep); font-size: 0.9rem; margin-bottom: 10px; display:block; }
+  .team-card p.bio{ color: var(--ink-soft); font-size: 0.95rem; }
+
+  /* ---------- TESTIMONIAL ---------- */
+  .testimonial{
+    padding: 110px 0;
+    text-align:center;
+  }
+  .testimonial blockquote{
+    font-family:'Newsreader', serif;
+    font-style: italic;
+    font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+    line-height: 1.4;
+    max-width: 26ch;
+    margin: 0 auto 28px;
+    color: var(--pine);
+  }
+  .testimonial cite{
+    font-style: normal;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  /* ---------- CTA BANNER ---------- */
+  .cta-banner{
+    background: var(--sage-pale);
+    border-radius: var(--radius-md);
+    padding: 64px;
+    display:grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 40px;
+    align-items:center;
+  }
+  .cta-banner h2{ font-size: 2rem; max-width: 14ch; }
+  .cta-banner-actions{ display:flex; justify-content:flex-end; gap:16px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background: var(--pine);
+    color: rgba(251,247,239,0.82);
+    padding: 72px 0 36px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(251,247,239,0.15);
+  }
+  .footer-brand{
+    font-family:'Newsreader', serif;
+    font-size: 1.3rem;
+    color: var(--ivory);
+    margin-bottom: 14px;
+  }
+  .footer-grid p{ font-size: 0.92rem; color: rgba(251,247,239,0.65); max-width: 34ch; }
+  .footer-col h4{
+    font-size: 0.85rem;
+    color: var(--ivory);
+    margin-bottom: 16px;
+    font-weight: 500;
+    font-family: 'Work Sans', sans-serif;
+  }
+  .footer-col li{ margin-bottom: 10px; font-size: 0.92rem; }
+  .footer-col a:hover{ color: var(--ivory); }
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    padding-top: 28px;
+    font-size: 0.85rem;
+    color: rgba(251,247,239,0.5);
+    flex-wrap:wrap;
+    gap: 12px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px){
+    .wrap{ padding: 0 22px; }
+    .nav-links{
+      position: fixed;
+      top: 76px; left:0; right:0;
+      background: var(--ivory);
+      flex-direction:column;
+      align-items:flex-start;
+      gap: 0;
+      padding: 8px 22px 20px;
+      border-bottom: 1px solid var(--line);
+      display:none;
+    }
+    .nav-links.open{ display:flex; }
+    .nav-links a{ width:100%; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .nav-links a.nav-cta{ border-bottom:none; text-align:center; margin-top:10px; }
+    .nav-toggle{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:40px; height:40px;
+      background:none; border:1px solid var(--line); border-radius: var(--radius-sm);
+    }
+    .hero .wrap{ grid-template-columns: 1fr; }
+    .hero-art{ order:-1; max-width: 280px; margin: 0 auto; }
+    .hero{ padding: 48px 0 64px; text-align:left; }
+    .section{ padding: 64px 0; }
+    .section-head{ grid-template-columns: 1fr; gap:16px; }
+    .services-grid{ grid-template-columns: 1fr 1fr; }
+    .service-card.large, .service-card.small, .service-card.wide-half{ grid-column: span 2; }
+    .steps{ grid-template-columns: 1fr; gap: 36px; }
+    .step{ border-left:none; padding-left:0; }
+    .team-grid{ grid-template-columns: 1fr; }
+    .cta-banner{ grid-template-columns: 1fr; padding: 40px 28px; text-align:left; }
+    .cta-banner-actions{ justify-content:flex-start; }
+    .footer-grid{ grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px){
+    .footer-grid{ grid-template-columns: 1fr; }
+    .services-grid{ grid-template-columns: 1fr; }
+    .service-card.large, .service-card.small, .service-card.wide-half{ grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <svg class="brand-mark" width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <path d="M13 3C9 3 6.5 5.8 6.5 9.6C6.5 12.4 7.6 14 8.3 16.5C9 19 9 22.5 10.6 22.9C12.2 23.3 12.4 19 13 19C13.6 19 13.8 23.3 15.4 22.9C17 22.5 17 19 17.7 16.5C18.4 14 19.5 12.4 19.5 9.6C19.5 5.8 17 3 13 3Z" stroke="#1F3B33" stroke-width="1.4" fill="none"/>
+      </svg>
+      Marlowe Dental
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <svg width="18" height="12" viewBox="0 0 18 12"><path d="M0 1H18M0 6H18M0 11H18" stroke="#23211D" stroke-width="1.5"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="nav-cta">Book a visit</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="hero-eyebrow">Family &amp; cosmetic dentistry, downtown</p>
+      <h1>A calmer way to care for your smile.</h1>
+      <p class="hero-sub">Marlowe Dental Studio pairs unhurried, modern care with a space that doesn't feel like a waiting room. Same-week appointments, honest pricing, and dentists who explain before they treat.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Book your first visit</a>
+        <a href="#approach" class="btn-ghost">See how it works</a>
+      </div>
+      <div class="hero-trust">
+        <strong><span data-count-to="4.9" data-decimals="1">0</span>/5</strong> from over <span data-count-to="2400" data-suffix="+">0</span> patients across the city
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 360 400" width="100%">
+        <circle cx="180" cy="200" r="170" fill="#DCE6DA"/>
+        <path class="tooth-outline" d="M180 90C130 90 96 128 96 178C96 214 112 236 122 268C132 300 132 348 156 354C180 360 184 300 196 300C208 300 212 360 236 354C260 348 260 300 270 268C280 236 296 214 296 178C296 128 230 90 180 90Z"
+          fill="#FBF7EF" stroke="#1F3B33" stroke-width="2"/>
+        <path class="tooth-nerve" d="M180 130C160 130 148 145 148 165" stroke="#8CA48D" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <circle class="tooth-dot" cx="180" cy="200" r="6" fill="#E2755A"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head" data-reveal="up">
+      <h2>Care built around what your teeth actually need</h2>
+      <p class="section-lede">No upselling, no scare tactics — just a clear plan, priced honestly, and explained in plain language before we start.</p>
+    </div>
+    <div class="services-grid" data-reveal-group>
+      <div class="service-card large" data-reveal="up" style="--i:0">
+        <svg class="service-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="17" stroke="#1F3B33" stroke-width="1.5"/><path d="M13 20L18 25L28 15" stroke="#E2755A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>General &amp; preventive care</h3>
+        <p>Cleanings, exams, and fillings from a team that tells you what's actually urgent versus what can wait — no pressure toward treatment you don't need yet.</p>
+      </div>
+      <div class="service-card small" data-reveal="up" style="--i:1">
+        <svg class="service-icon" viewBox="0 0 40 40" fill="none"><path d="M12 26C12 18 16 12 20 12C24 12 28 18 28 26" stroke="#1F3B33" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="20" cy="28" r="2" fill="#E2755A"/></svg>
+        <h3>Cosmetic dentistry</h3>
+        <p>Whitening, bonding, and veneers designed to look like your teeth, only rested.</p>
+      </div>
+      <div class="service-card wide-half" data-reveal="up" style="--i:2">
+        <svg class="service-icon" viewBox="0 0 40 40" fill="none"><rect x="10" y="16" width="20" height="10" rx="2" stroke="#1F3B33" stroke-width="1.5"/><path d="M14 16V13M26 16V13" stroke="#1F3B33" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <h3>Orthodontics</h3>
+        <p>Clear aligners and traditional braces for teens and adults, with progress you can actually see each month.</p>
+      </div>
+      <div class="service-card wide-half" data-reveal="up" style="--i:3">
+        <svg class="service-icon" viewBox="0 0 40 40" fill="none"><path d="M20 8V32M8 20H32" stroke="#E2755A" stroke-width="2" stroke-linecap="round"/></svg>
+        <h3>Same-day emergency care</h3>
+        <p>Chipped a tooth or in pain? We hold two slots open every weekday for exactly this.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="approach">
+  <div class="wrap">
+    <div class="section-head" data-reveal="up">
+      <h2>Three visits, start to finish</h2>
+      <p class="section-lede">Most new patients are fully settled in — cleaning done, plan in hand — within three appointments.</p>
+    </div>
+    <div class="steps" data-reveal-group>
+      <div class="step" data-reveal="up" style="--i:0">
+        <span class="step-num">01</span>
+        <h3>Book online</h3>
+        <p>Pick a time that works, tell us what's bothering you if anything is, and we'll confirm within the hour.</p>
+      </div>
+      <div class="step" data-reveal="up" style="--i:1">
+        <span class="step-num">02</span>
+        <h3>Meet your dentist</h3>
+        <p>A full exam and a conversation about what you actually want from your smile, no assumptions.</p>
+      </div>
+      <div class="step" data-reveal="up" style="--i:2">
+        <span class="step-num">03</span>
+        <h3>Get your plan</h3>
+        <p>A written treatment plan with real prices, sent the same day, so you can decide on your own time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="team">
+  <div class="wrap">
+    <div class="section-head" data-reveal="up">
+      <h2>The dentists you'll actually see</h2>
+      <p class="section-lede">Three practitioners, no rotating cast — so your dentist remembers your last visit without checking notes.</p>
+    </div>
+    <div class="team-grid" data-reveal-group>
+      <div class="team-card">
+        <div class="team-photo p1" data-reveal="wipe" style="--i:0">EM</div>
+        <h3>Dr. Elena Marsh</h3>
+        <span class="team-role">Founding dentist, general &amp; cosmetic</span>
+        <p class="bio">Twelve years in practice, with a particular interest in nervous patients and making first visits easy.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo p2" data-reveal="wipe" style="--i:1">RK</div>
+        <h3>Dr. Raj Kapoor</h3>
+        <span class="team-role">Orthodontics</span>
+        <p class="bio">Trained in both traditional braces and clear aligners; runs our teen orthodontics program.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo p3" data-reveal="wipe" style="--i:2">SO</div>
+        <h3>Dr. Sofia Ortiz</h3>
+        <span class="team-role">Oral surgery &amp; emergency care</span>
+        <p class="bio">Handles our same-day emergency slots and more complex extractions and implants.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial">
+  <div class="wrap">
+    <blockquote data-reveal="scale">"First dentist who's ever drawn me a diagram instead of just telling me to trust them."</blockquote>
+    <cite>— Priya N., patient since 2022</cite>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-banner" data-reveal="up">
+      <h2>Ready to stop putting it off?</h2>
+      <div class="cta-banner-actions">
+        <a href="#contact" class="btn-primary">Book your first visit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Marlowe Dental Studio</div>
+        <p>142 Harbor Street, Suite 4, downtown. Open Monday to Saturday, with two emergency slots held daily.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+15550123456">(555) 012-3456</a></li>
+          <li><a href="mailto:hello@marlowedental.example">hello@marlowedental.example</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hours</h4>
+        <ul>
+          <li>Mon – Fri: 8am – 6pm</li>
+          <li>Saturday: 9am – 2pm</li>
+          <li>Sunday: closed</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#team">Team</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Marlowe Dental Studio. Sample site for demonstration.</span>
+      <span>Design preview — not a live practice</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Scroll-triggered reveals
+  var revealEls = document.querySelectorAll('[data-reveal]');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  } else {
+    var revealObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(function(el){ revealObserver.observe(el); });
+  }
+
+  // Animated counters for the hero trust stat
+  var counters = document.querySelectorAll('[data-count-to]');
+  function animateCounter(el){
+    var target = parseFloat(el.getAttribute('data-count-to'));
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (reduceMotion) {
+      el.textContent = target.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
+      return;
+    }
+    var start = 0;
+    var duration = 1400;
+    var startTime = null;
+    function step(ts){
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var value = start + (target - start) * eased;
+      el.textContent = value.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if (counters.length) {
+    if (!('IntersectionObserver' in window)) {
+      counters.forEach(animateCounter);
+    } else {
+      var counterObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.6 });
+      counters.forEach(function(el){ counterObserver.observe(el); });
+    }
+  }
+</script>
+</body>
+</html>
